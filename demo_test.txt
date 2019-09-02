@@ -1,2 +1,0 @@
-﻿<h2>jQuery and AJAX is FUN!!!!!測試文字</h2>
-<p id="p1">This is some text in a paragraph.測試文字</p>
