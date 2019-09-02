@@ -1,0 +1,139 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"> 
+<html lang="zh-tw"> 
+<head> 
+<meta name="Generator" content="EditPlus"> 
+<meta name="Author" content="男丁格爾's 脫殼玩,梅干扣肉"> 
+<meta name="Keywords" content=""> 
+<meta name="Description" content=""> 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
+<meta http-equiv="Content-Script-Type" content="text/javascript"> 
+<meta http-equiv="Content-Style-Type" content="text/css"> 
+<!--<script type="text/javascript" src="http://code.jquery.com/jquery-latest.pack.js"></script> -->
+<script type="text/javascript" src="jquery.min-1.4.2.js"></script>
+<title>梅問題教學網－範例展示【jQuery+XML版圖片展示】</title> 
+<style type="text/css"> 
+	.abgne_product_arrow_silder {
+		width: 450px;
+		height: 250px;
+		position: relative;
+		border: 1px solid #ccc;
+		overflow: hidden;
+	}
+	.abgne_product_arrow_silder ul, .abgne_product_arrow_silder ul li {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+	.prev {
+		background:url(images/prev.gif) no-repeat;
+		width: 38px;
+		height: 48px;
+		position: absolute;
+		left: -48px;	/* 先藏在左邊 */
+		top: 101px;		/* (區塊高-圖片高) / 2 */
+		z-index: 100;
+	}
+	.next {
+		background:url(images/next.gif) no-repeat;
+		width: 38px;
+		height: 48px;
+		position: absolute;
+		right: -48px;	/* 先藏在右邊 */
+		top: 101px;		/* (區塊高-圖片高) / 2 */
+		z-index:100;
+	}
+	.abgne_product_arrow_silder ul li {
+		position: absolute;
+		z-index: 1;
+	}
+	.abgne_product_arrow_silder ul li.selected {
+		z-index: 99;
+	}
+	a img {
+		border: none;
+	}
+</style> 
+<script type="text/javascript"> 
+	/* 讀取xml 開始 ------------------------------------------------------------------------------ */
+	$.ajax({
+    url:'source.xml',
+    type: 'GET',
+    dataType: 'xml',//資料型態可以不設定，且此型態不可是text或html
+    timeout: 1000,
+    error: function(xml){
+        alert('讀取xml錯誤'+xml); //當xml讀取失敗
+    },
+    success: function(xml){
+        $(xml).find("photo").each(function(i){  //取得xml父節點       
+            var total=$(xml).find("photo").length;//xml的總筆數
+			var photosrc=$(this).children("adsrc").text(); //取得子節點中的src
+			var photourl=$(this).children("adurl").text(); //取得子節點中的url
+			
+			if(i==0){	  
+			  　	$('.abgne_product_arrow_silder ul').append('<li class=selected><a href='+photourl+' target=blank><img src='+photosrc+' /></a></li>');
+			}else{
+				$('.abgne_product_arrow_silder ul').append('<li><a href='+photourl+' target=blank><img src='+photosrc+' /></a></li>');
+			}
+	
+	/* 讀取xml結束 ------------------------------------------------------------------------------ */		
+		//當xml讀取完畢時，就載入男丁大的特效【http://abgne.tw/jquery/apply-jquery/hide-left-right-arrow-gallery.html】
+		if(i == total-1){
+			// 先取得必要的元素並用 jQuery 包裝
+			// 並設定箭頭圖片的寬度及其透明度
+			// 接著產生兩個放置箭頭用的空白超連結
+			var $silder = $('.abgne_product_arrow_silder'), 
+				$li = $('ul li', $silder).not(':first').css('opacity', 0).end(),
+				arrowWidth = 48 * -1, 
+				arrowOpacity = .3, 
+				$arrows = $('<a href="#" class="prev"></a><a href="#" class="next"></a>').css('opacity', arrowOpacity),
+				$prev = $arrows.filter('.prev'), 
+				$next = $arrows.filter('.next'), 
+				fadeSpeed = 400;
+			
+			// 把箭頭超連結加到 $silder 中
+			// 並幫 $silder 加上 hover 事件
+			$silder.append($arrows).hover(function(){
+				var no = $li.filter('.selected').index();
+				arrowAction(no > 0 ? 0 : arrowWidth, no < $li.length - 1 ? 0 : arrowWidth);
+		
+			}, function(){
+				arrowAction(arrowWidth, arrowWidth);
+				
+			});
+			
+			// 當滑鼠點擊左右箭頭時
+			$arrows.click(function(){
+				// 先取出目前顯示的 li 及其排行
+				var $selected = $li.filter('.selected'),
+					no = $selected.index();
+				
+				// 判斷是要上一張還是下一張
+				no = this.className=='prev' ? no - 1 : no + 1;
+				$li.eq(no).stop().fadeTo(fadeSpeed + 100, 1, function(){
+					arrowAction(no > 0 ? 0 : arrowWidth, no < $li.length - 1 ? 0 : arrowWidth);
+				}).addClass('selected').siblings().fadeTo(fadeSpeed, 0).removeClass('selected');
+	 
+				return false;
+			}).focus(function(){
+				this.blur();
+			});
+			
+			// 控制左右箭頭顯示或隱藏
+			function arrowAction(l, r){
+				$prev.stop().animate({ left: l });
+				$next.stop().animate({ right: r });
+			}
+		}
+	});
+  }
+	});
+</script>
+
+</head> 
+ 
+<body> 
+	<div class="abgne_product_arrow_silder"> 
+		<ul></ul> 
+	</div> 
+</body> 
+</html>
