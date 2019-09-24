@@ -1,0 +1,149 @@
+
+.forum_link_bar {
+  display: block;
+  margin-top: 5px;
+  width: 80%;
+  background-color: #2D2B2A;
+  padding: 8px 0px 8px 15px;
+  color: #C1C1C1;
+  border-radius: 0px;
+  border-top: 1px solid #565656;
+}
+
+
+.forum_link_bar a{
+  color: #C1C1C1;
+  margin-right: 10px;
+  font-size: 13px;
+}
+
+#contaiter .forum_link_bar a {
+  color: #FFF!important;
+}
+#contaiter .forum_link_bar a:hover{
+  color: #c1c1c1!important;
+}
+#contaiter .forum_link_bar a.selected {
+  color: #C6600C!important;
+  font-weight: bold;
+}
+
+
+
+#nav-link {
+	 width: 80%;
+height: 50px;
+    padding: 0 8px;
+    border-top: #594b46 1px solid;
+    overflow: hidden;
+    white-space: nowrap;
+    text-align: center;
+    background-color: #2E2623;
+    background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJod…AiIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBmaWxsPSJ1cmwoI2hhdDApIiAvPgo8L3N2Zz4=);
+    background-image: -moz-linear-gradient(bottom,rgba(0,0,0,0.2) 0%,rgba(0,0,0,0) 100%);
+    background-image: -o-linear-gradient(bottom,rgba(0,0,0,0.2) 0%,rgba(0,0,0,0) 100%);
+    background-image: -webkit-linear-gradient(bottom,rgba(0,0,0,0.2) 0%,rgba(0,0,0,0) 100%);
+    background-image: linear-gradient(bottom,rgba(0,0,0,0.2) 0%,rgba(0,0,0,0) 100%);
+    -moz-box-shadow: 0 2px 3px 0 rgba(0,0,0,0.5);
+    -webkit-box-shadow: 0 2px 3px 0 rgba(0,0,0,0.5);
+    box-shadow: 0 2px 3px 0 rgba(0,0,0,0.5);
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    border-radius: 5px;
+	    list-style: none;
+}
+
+
+
+
+body{
+	background-color:#333;
+}
+
+.hr-text {
+  line-height: 1em;
+  position: relative;
+  outline: 0;
+  border: 0;
+  color: black;
+  text-align: center;
+  height: 1.5em;
+  opacity: .5;
+}
+.hr-text:before {
+  content: '';
+  background: linear-gradient(to right, transparent, #818078, transparent);
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  height: 1px;
+}
+.hr-text:after {
+  content: attr(data-content);
+  position: relative;
+  display: inline-block;
+  color: black;
+  padding: 0 .5em;
+  line-height: 1.5em;
+  color: #818078;
+  background-color: #fcfcfa;
+}
+.view{
+	
+	background-image:url(../view.jpg);
+	 background-repeat:no-repeat;
+     height:300px;
+	 width:1200px;
+	 background-attachment: fixed;
+	 background-position: center; 
+    background-size: cover;
+	
+	position: fixed;
+	z-index:-5
+
+}
+
+
+
+.close {
+    cursor: pointer;
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: #96CEB4;
+    position: relative;
+  }
+  i {
+    color: #FFEEAD;
+    font-size: 48px;
+    position: absolute;
+    top: 8%;
+    left: 19%;
+  }
+
+  /*定???*/
+  @-webkit-keyframes spin { /*兼容性?法。spin是???的??名?*/
+    from { /*??起始??*/
+      -webkit-transform: rotate(0deg);
+    }
+    to { /*???束??*/
+      -webkit-transform: rotate(360deg);
+    }
+  }
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .close:hover i {
+    -webkit-animation: spin 1s linear infinite;/*鼠?hover?，i??旋?,infinite表示???限循?*/
+    animation: spin 1s linear infinite;    
+  }
